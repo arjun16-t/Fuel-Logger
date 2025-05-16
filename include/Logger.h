@@ -13,6 +13,10 @@ std::vector<std::string> lastLog();
 std::vector<std::vector<std::string>> viewLogs();
 
 // ANALYSIS METHODS
-void showStats();
+int getTotalLogs();
+long getTotalOdo();
+float getTotalFuel();
+float getTotalAvg();
+std::vector<std::vector<std::string>> getMileInfo();
 
 #endif

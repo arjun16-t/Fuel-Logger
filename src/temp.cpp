@@ -27,9 +27,10 @@ int main() {
     }
 
     for (const auto& log: logs) {
-        for(const auto& cell: log) {
-            std::cout << cell << " | ";
-        }
+        std::cout << log.at(2);
         std::cout << "\n";
+    }
+    for (int i = 0; i < logs.size(); i++) {
+        std::cout << logs[i][2] << std::endl;
     }
 }
