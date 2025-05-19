@@ -104,6 +104,11 @@ float getTotalAvg() {
 }
 
 std::vector<std::vector<std::string>> getMileInfo() {
+    /*
+    * @brief Gets Worst and Best Mileage of all the logs
+    * 0 - Best Mileage
+    * 1 - Worst Mileage
+    */
     auto logs = viewLogs();
     if (logs.size() < 2)
         throw std::runtime_error("Not enough logs to determine mileage info.");
@@ -115,7 +120,7 @@ std::vector<std::vector<std::string>> getMileInfo() {
     mileInfo[0] = logs[0];
     mileInfo[1] = logs[1];
 
-    for(int i = 0; i < logs.size(); i++) {
+    for(size_t i = 0; i < logs.size(); i++) {
         float curr = std::stof(logs[i][MILEAGE]);
         if (curr > best) {
             best = curr;
@@ -128,31 +133,16 @@ std::vector<std::vector<std::string>> getMileInfo() {
     }
     return mileInfo;
 }
-/*
-MORE ANALYSIS METHODS TO IMPLEMENT
-1) Monthly Fuel Consumption
-2) Days Between FillUps
-3) Average Mileage per month
-4) Total Cost Estimation (include cost column)
-5) Longest Trip
-6) Shortest Trip
------- ADVANCED ------
-7) Mileage Trend
-8) Abnormal Mileage Detection
 
-*/
 
-int main() {
-    addLog(3.5, 14480);
-    addLog(2.7, 14570);
-    
-    auto info = getMileInfo();
-    printLogHeader(std::cout);
-    std::cout << "Best Mileage Record:\n" << parseRow(info[0]) << "\n";
-    std::cout << "Worst Mileage Record:\n" << parseRow(info[1]) << "\n";
-
-    std::cout << getTotalLogs() << std::endl;
-    std::cout << getTotalOdo() << std::endl;
-    std::cout << getTotalFuel() << std::endl;
-    std::cout << getTotalAvg() << std::endl;
-}
+// int main() {
+//     auto logs = viewLogs();
+//     if (logs.empty()) {
+//         std::cout << "No logs found.\n";
+//     } else {
+//         printLogHeader(std::cout);
+//         for (const auto& log : logs) {
+//             std::cout << parseRow(log) << "\n";
+//         }
+//     }
+// }

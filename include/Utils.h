@@ -2,9 +2,9 @@
 #define UTILS_H
 
 #include <string>
-#include <iomanip>
-#include <ctime>
 #include <vector>
+#include <iostream>
+#include <limits>
 
 // FOR BETTER OUTPUT
 struct LogEntry {
@@ -21,14 +21,11 @@ void printLogHeader(std::ostream& os);
 std::string getCurrentDateTime();
 float convertToLiters(float rupees, float fuelRate = 104.05);
 
-// VALIDATING USER INPUT
-bool isValidNumber(const std::string& str);
-
 // CLI ENHANCEMENTS
 void clearConsole();
 void pauseAndWait();
 
 // FOR FUTURE IMPLEMENTATION
-std::tm parseDateTime(const std::string& dateTimeStr);                  // For comparing logs by date (for trend/monthly analysis).
-int daysBetween(const std::string& date1, const std::string& date2);    // Used to compute refill intervals.
+// std::tm parseDateTime(const std::string& dateTimeStr);                  // For comparing logs by date (for trend/monthly analysis).
+// int daysBetween(const std::string& date1, const std::string& date2);    // Used to compute refill intervals.
 #endif

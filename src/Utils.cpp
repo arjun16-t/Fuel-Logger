@@ -1,4 +1,9 @@
 #include "../include/Utils.h"
+#include <iomanip>
+#include <chrono>
+#include <ctime>
+#include <sstream>
+#include <cstdlib>
 
 // FOR DISPLAYING LOGS AND HEADER
 void printLogHeader(std::ostream& os) {
@@ -41,15 +46,16 @@ std::string getCurrentDateTime() {
 
 }
 
-float convertToLiters(float rupees, float fuelRate = 104.05) {
+float convertToLiters(float rupees, float fuelRate) {
     return rupees/fuelRate;
 }
 
-// VALIDATING USER INPUT
-bool isValidNumber(const std::string& str) {
-    
+// CLI ENHANCEMENTS
+void clearConsole() {
+    system("cls");
 }
 
-// CLI ENHANCEMENTS
-void clearConsole();
-void pauseAndWait();
+void pauseAndWait() {
+    std::cout << "\nPress Enter to continue...";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}

@@ -1,41 +1,31 @@
-# Compiler
+# Compiler and flags
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Iinclude
+CXXFLAGS = -Wall -Wextra -std=c++17
 
 # Directories
-SRCDIR = src
-BUILDDIR = build
+SRC_DIR = src
+INC_DIR = include
+BUILD_DIR = build
 
-# Detect OS and set executable extension
-ifeq ($(OS),Windows_NT)
-    EXE_EXT = .exe
-else
-    EXE_EXT =
-endif
+# Source files
+SRCS = $(SRC_DIR)/main.cpp \
+       $(SRC_DIR)/Logger.cpp \
+       $(SRC_DIR)/Utils.cpp
 
-TARGET = $(BUILDDIR)/FuelLogger$(EXE_EXT)
+# Output binary
+TARGET = $(BUILD_DIR)/fuel_logger
 
-# Source and object files
-SOURCES = $(wildcard $(SRCDIR)/*.cpp)
-OBJECTS = $(patsubst $(SRCDIR)/%.cpp, $(BUILDDIR)/%.o, $(SOURCES))
+# Object files
+OBJS = $(SRCS:.cpp=.o)
 
-# Default target
+# Build rules
 all: $(TARGET)
 
-# Link object files into the final executable
-$(TARGET): $(OBJECTS)
-	@mkdir -p $(BUILDDIR)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+$(TARGET): $(SRCS)
+	@mkdir -p $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -I$(INC_DIR) $(SRCS) -o $(TARGET)
 
-# Compile each .cpp file to .o file in build/
-$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
-	@mkdir -p $(BUILDDIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-# Clean build files
 clean:
-	rm -rf $(BUILDDIR)
+	rm -rf $(BUILD_DIR)/*.o $(TARGET)
 
-# Run the app
-run: all
-	./$(TARGET)
+.PHONY: all clean
